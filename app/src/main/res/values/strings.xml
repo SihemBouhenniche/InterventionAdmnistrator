@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Tdm2Exo2</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Ajouter</string>
+    <string name="title_notifications">Notifications</string>
+
+    <string-array name="types">
+        <item>Urgente</item>
+        <item>Importante</item>
+        <item>Compliqué</item>
+        <item>Facile</item>
+    </string-array>
+</resources>

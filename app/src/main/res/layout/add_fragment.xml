@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <android.support.constraint.ConstraintLayout
+                                                 android:layout_width="match_parent"
+                                                 android:layout_height="match_parent">
+
+        <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/num_add" android:layout_marginTop="16dp"
+                app:layout_constraintTop_toTopOf="parent" android:layout_marginStart="8dp"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent" android:hint="numero "/>
+        <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/nom_add"
+                android:layout_marginStart="8dp"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/num_add" android:hint="Nom du plombier"/>
+        <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/type_add" app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="36dp"
+                app:layout_constraintTop_toBottomOf="@+id/nom_add" android:entries="@array/types"/>
+        <CalendarView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/date_add" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/type_add" android:layout_marginTop="32dp"/>
+        <Button
+                android:text="Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/add_btn"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp" android:layout_marginTop="32dp"
+                app:layout_constraintTop_toBottomOf="@+id/date_add" app:layout_constraintHorizontal_bias="0.498"/>
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>
