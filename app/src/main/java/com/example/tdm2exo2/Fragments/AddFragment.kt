@@ -62,12 +62,10 @@ class AddFragment : Fragment() {
         //Get the file Location and name where Json File are get stored
         lateinit var file:File
         val fileName = this.activity!!.cacheDir.absolutePath + "/InterventionJson.json"
-        if (!File(fileName).exists()) {
-            file  = File(fileName)
-        }
+        file  = File(fileName)
 
-
-        file.writeText(jsonString)}
+        file.writeText(jsonString)
+    }
 
 
 }
