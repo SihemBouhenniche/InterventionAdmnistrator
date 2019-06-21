@@ -4,12 +4,11 @@ import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
-import android.widget.FrameLayout
 import android.widget.TextView
 import com.example.tdm2exo2.Fragments.AddFragment
 import com.example.tdm2exo2.Fragments.HomeFragment
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity()  {
 
 
     private lateinit var textMessage: TextView
@@ -23,10 +22,6 @@ class MainActivity : AppCompatActivity() {
             R.id.navigation_dashboard -> {
                 val fragment = AddFragment()
                 addFragment(fragment)
-                return@OnNavigationItemSelectedListener true
-            }
-            R.id.navigation_notifications -> {
-                textMessage.setText(R.string.title_notifications)
                 return@OnNavigationItemSelectedListener true
             }
         }
