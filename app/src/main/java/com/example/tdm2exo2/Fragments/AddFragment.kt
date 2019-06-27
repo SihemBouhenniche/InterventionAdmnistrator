@@ -1,19 +1,22 @@
 package com.example.tdm2exo2.Fragments
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CalendarView
 import android.widget.Toast
+import androidx.room.Room
 import com.example.tdm2exo2.R
+import com.example.tdm2exo2.database.DataBase
 import com.example.tdm2exo2.model.Intervention
-import com.google.gson.Gson
 import kotlinx.android.synthetic.main.add_fragment.*
-import java.io.File
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.lang.Integer.parseInt
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class AddFragment : Fragment() {
@@ -42,30 +45,32 @@ class AddFragment : Fragment() {
         }
             else
         {
-            var gson = Gson()
-            val intervention = Intervention(
+
+            val intervention = Intervention(0,
                 parseInt(num_add.text.toString()),
                 date,
                 nom_add.text.toString(),
                 type_add.selectedItem.toString()
             )
-            HomeFragment.interventions.add(intervention)
-            var jsonString:String = gson.toJson(HomeFragment.interventions)
-            writeJSONtoFile(jsonString)
+            (HomeFragment.interventions as ArrayList<Intervention>).add(intervention)
+            val db = Room.databaseBuilder(
+                context!! ,
+                DataBase::class.java, "intervention.db"
+            ).build()
+
+            GlobalScope.launch {
+
+                    db.interventionDao().insertAll(intervention)
+
+            }
+
             Toast.makeText(this.context,"ajouté avec succés ",Toast.LENGTH_SHORT).show()
         }
 
 
     }}
 
-    private fun writeJSONtoFile(jsonString:String) {
-        //Get the file Location and name where Json File are get stored
-        lateinit var file:File
-        val fileName = this.activity!!.cacheDir.absolutePath + "/InterventionJson.json"
-        file  = File(fileName)
 
-        file.writeText(jsonString)
-    }
 
 
 }

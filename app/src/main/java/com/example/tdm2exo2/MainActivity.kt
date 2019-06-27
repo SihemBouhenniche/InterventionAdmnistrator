@@ -1,9 +1,9 @@
 package com.example.tdm2exo2
 
 import android.os.Bundle
-import android.support.design.widget.BottomNavigationView
-import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import android.widget.TextView
 import com.example.tdm2exo2.Fragments.AddFragment
 import com.example.tdm2exo2.Fragments.HomeFragment

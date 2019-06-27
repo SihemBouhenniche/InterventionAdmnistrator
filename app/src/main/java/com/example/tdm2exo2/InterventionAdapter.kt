@@ -8,10 +8,12 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.Filter
 import android.widget.Filterable
+import androidx.room.Room
+import com.example.tdm2exo2.database.DataBase
 import com.example.tdm2exo2.model.Intervention
-import com.google.gson.Gson
 import kotlinx.android.synthetic.main.card_intervention.view.*
-import java.io.File
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.util.*
 
 class InterventionAdapter : BaseAdapter,Filterable{
@@ -41,29 +43,46 @@ class InterventionAdapter : BaseAdapter,Filterable{
         val item = filteredList.get(position)
         var inflator = context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val layoutItem = inflator.inflate(R.layout.card_intervention,null)
+        val db = Room.databaseBuilder(
+            context!! ,
+            DataBase::class.java, "intervention.db"
+        ).build()
         //layoutItem.cardTitle.text = item.type!!
         layoutItem.num.text = item.num.toString()
         layoutItem.nom.text = item.nom
         layoutItem.date.text = item.date.toString()
         layoutItem.type.text = item.type
+
         layoutItem.delete_btn.setOnClickListener{
 
-            var gson = Gson()
-            var jsonString:String = gson.toJson(this.list)
-            writeJSONtoFile(jsonString)
+
+
+            GlobalScope.launch {
+
+                db.interventionDao().delete(item)
+
+            }
             this.list.removeAt(position)
+            notifyDataSetChanged()
+        }
+
+        layoutItem.edit_btn.setOnClickListener{
+
+             item.type="other"
+
+            GlobalScope.launch {
+
+                db.interventionDao().update(item)
+
+            }
+            layoutItem.type.text=item.type
             notifyDataSetChanged()
         }
         return layoutItem
     }
 
 
-    private fun writeJSONtoFile(jsonString:String){
-        //Get the file Location and name where Json File are get stored
-        val fileName = this.context.cacheDir.absolutePath+"/InterventionJson.json"
-        val file= File(fileName)
-        file.writeText(jsonString)
-    }
+
     override fun getItem(position: Int): Any {  if (filteredList!=null)
     { return filteredList.get(position)}
     else
